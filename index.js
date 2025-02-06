@@ -31,60 +31,29 @@ function Book(title, author, pages, read, genre) {
     };
 };
 
+// Adds the function to myLibrary array //
 function addBookToLibrary(title, author, pages, read, genre) {
     const book = new Book(title, author, pages, read, genre);
     myLibrary.push(book);
 }
 
-const book1 = new Book(
-    "Twilight,",
-    "Meyer, Stephanie,",
-    "544 pages,",
-    "Read,",
-    "Romance, Supernatural"
-);
+//Book Array //
 
-addBookToLibrary(book1);
+addBookToLibrary( "Twilight","Meyer, Stephanie","544 pages","Read","Romance, Supernatural");
 
-const book2 = new Book(
-    "Thigh High: Reiwa Hanamaru Academy Vol.1,",
-    "Kotobuki,",
-    "137 pages,",
-    "Read,",
-    "Teen, Drama",
-);
+addBookToLibrary("Thigh High: Reiwa Hanamaru Academy Vol.1","Kotobuki","137 pages","Read", "Teen, Drama",);
 
-addBookToLibrary(book2);
+addBookToLibrary("Go for it! Nakamura!","Syundei","188 pages","Read","Teen, Roamance, Drama");
 
-const book3 = new Book(
-    "Go for it! Nakamura!,",
-    "Syundei,",
-    "188 pages,",
-    "Read,",
-    "Teen, Roamance, Drama",
-);
+addBookToLibrary("Midnight Sun", "Meyer, Stephanie","662 pages","Mostly Read","Romance, Vampire, Fiction");
 
-addBookToLibrary(book3);
+addBookToLibrary("Heaven's Official Blessing Book.1","Mo Xiang Tong Xiu","417 pages","Read","Romance, Fantasy, Fiction");
 
-const book4 = new Book(
-    "Heaven's Official Blessing Book.1,",
-    "Mo Xiang Tong Xiu,",
-    "417 pages,",
-    "Read",
-    "Romance, Fantasy, Fiction",
-);
 
-addBookToLibrary(book4);
 
-const book5 = new Book(
-    "Midnight Sun,",
-    "Meyer, Stephanie,",
-    "662 pages,",
-    "Mostly Read,",
-    "Romance, Vampire, Fiction",
-)
 
-addBookToLibrary(book5);
+
+//console.log('Books:', myLibrary)
 
 // Events //
 
@@ -98,33 +67,60 @@ let genreInput = document.getElementById('genre')
 
 const container = document.querySelector('#container')
 const bookBtn = document.querySelector("#addBtn");
+const table = document.querySelector('#tableBody');
 
-function displayBook(arr) {
-    const table = document.getElementById('library')
-    const titleColumn = document.getElementById('title-table')
-    titleColumn = addBookToLibrary(bookTitle);
+// Display books onto table //
+function displayBooks() {
+    table.childNodes.forEach((child) => {
+        table.removeChild(child)
+    })
     
-    console.log(displayBook);
+
+    myLibrary.forEach((book) => {
+        const newRow = document.createElement('tr');
+        newRow.classList.add("bookData");
+        // Add the bookData class name to the new row
+
+        const titleCell = document.createElement('td');
+        titleCell.textContent = book.title
+        newRow.appendChild(titleCell);
+
+        const authorCell = document.createElement('td');
+        authorCell.textContent = book.author
+        newRow.appendChild(authorCell);
+
+        const pageCell = document.createElement('td');
+        pageCell.textContent = book.page
+        newRow.appendChild(pageCell);
+
+        const readCell = document.createElement('td');
+        readCell.textContent = book.read
+        newRow.appendChild(readCell);
+
+        const genreCell = document.createElement('td');
+        genreCell.textContent = book.genre
+        newRow.appendChild(genreCell);
+
+        table.appendChild(newRow);
+    })
 };
 
-bookBtn.addEventListener('onclick', () => {
+displayBooks()
+
+bookBtn.addEventListener('click', () => {
     let bookTitle = titleInput.value
     let bookAuthor = authorInput.value
     let bookPage = pageInput.value
     let bookRead = readInput.value
-    let bookGenre = genreInput.values
+    let bookGenre = genreInput.value
 
+        
 
     addBookToLibrary(bookTitle, bookAuthor, bookPage, bookRead, bookGenre)
 
-    let firstRow = document.getElementById("title-table").rows[0];
-    let newRow = firstRow.insertCell(num);
-
-    for (let num = 1; num < addBookToLibrary.length; num++) {
-         newRow += firstRow.insertCell(num)[i];
-        console.log(myLibrary.length)
-    }
-
+    displayBooks()
+     
+    // Clears Table Value //
     titleInput.value =''
     authorInput.value =''
     pageInput.value =''
@@ -134,7 +130,3 @@ bookBtn.addEventListener('onclick', () => {
 
 });
 
-
-
-form.appendChild(bookBtn);
-container.appendChild(bookBtn);
