@@ -150,10 +150,12 @@ bookBtn.addEventListener('click', () => {
     readInput.value =''
     genreInput.value =''
 
-
 });
+
 
 // Read Status Button //
 // when this button is clicked, I want the read status to be "Read"
 // else it should read "Not Read".
-
+// Edited March 4th 2025
+// create "yes" and "no" buttons to represent the reading status and return a set text 
+// include a reset button to start over if needed.
